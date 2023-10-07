@@ -1,10 +1,10 @@
 # 实验一 Git和Markdown基础
 
-班级： 21计科1
+班级： 21计科1班
 
-学号： 202302200000
+学号： B20210302118
 
-姓名： 张三
+姓名： 申佳
 
 Github地址：<https://github.com/yourusername/python_course>
 
@@ -96,7 +96,7 @@ git commit -m "first commit"
 
 如果是Python代码，应该使用下面代码块格式，例如：
 
-![Python代码](/Experiments/img/2023-07-26-22-52-20.png)
+![Python代码](./img/2023-07-26-22-52-20.png)
 
 显示效果如下：
 
