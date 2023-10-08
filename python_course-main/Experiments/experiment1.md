@@ -6,7 +6,7 @@
 
 姓名： 申佳
 
-Github地址：<https://github.com/yourusername/python_course>
+Github地址：<https://github.com/ShenJia0722/python-from-shenjia>
 
 ---
 
@@ -45,6 +45,7 @@ git pull
 ```
 
 3. 注册Github账号，创建一个新的仓库，用于存放实验报告和实验代码。
+   
 4. 安装VScode，下载地址：[Visual Studio Code](https://code.visualstudio.com/)
 5. 安装下列VScode插件
    - GitLens
@@ -65,7 +66,7 @@ git pull
 
 访问[learngitbranching.js.org](https://learngitbranching.js.org)，如下图所示完成Main部分的Introduction Sequence和Ramping Up两个小节的学习。
 
-![Learngitbranching.js.org](/Experiments/img/2023-07-28-21-07-40.png)
+![Learngitbranching.js.org](./img/2023-07-28-21-07-40.png)
 
 上面你学习到的git命令基本上可以应付百分之九十以上的日常使用，如果你想继续深入学习git，可以：
 
@@ -83,7 +84,7 @@ git pull
 
 请将实验过程中编写的代码和运行结果放在这里，注意代码需要使用markdown的代码块格式化，例如Git命令行语句应该使用下面的格式：
 
-![Git命令](/Experiments/img/2023-07-26-22-48.png)
+![Git命令](./img/2023-07-26-22-48.png)
 
 显示效果如下：
 
