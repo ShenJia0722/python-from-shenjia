@@ -214,7 +214,7 @@ flowchart LR
 
 注意代码需要使用markdown的代码块格式化，例如Git命令行语句应该使用下面的格式：
 
-![Git命令](/Experiments/img/2023-07-26-22-48.png)
+![Git命令](./img/2023-07-26-22-48.png)
 
 显示效果如下：
 
@@ -227,7 +227,7 @@ git commit -m "first commit"
 
 如果是Python代码，应该使用下面代码块格式，例如：
 
-![Python代码](/Experiments/img/2023-07-26-22-52-20.png)
+![Python代码](./img/2023-07-26-22-52-20.png)
 
 显示效果如下：
 

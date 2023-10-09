@@ -2,13 +2,13 @@
 
 班级： 21计科1班
 
-学号： 202302200000
+学号： 20210302118
 
-姓名： 张三
+姓名： 申佳
 
-Github地址：<https://github.com/yourusername/python_course>
+Github地址：<https://github.com/ShenJia0722/python-from-shenjia>
 
-CodeWars地址：<https://www.codewars.com/users/yourusername>
+CodeWars地址：<https://www.codewars.com/users/Belief_V>
 
 ---
 
