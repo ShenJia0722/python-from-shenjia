@@ -1,14 +1,14 @@
 # 实验三 Python列表
 
-班级： 21计科1
+班级： 21计科1班
 
-学号： 202302200000
+学号： B20210302118
 
 姓名： 张三
 
-Github地址：<https://github.com/yourusername/python_course>
+Github地址：<https://github.com/ShenJia0722/python-from-shenjia>
 
-CodeWars地址：<https://www.codewars.com/users/yourusername>
+CodeWars地址：<https://www.codewars.com/users/Belief_V>
 
 ---
 
@@ -58,6 +58,10 @@ Python列表操作
 代码提交地址：
 <https://www.codewars.com/kata/514b92a657cdc65150000006>
 
+实验代码：
+```python
+
+```
 ---
 
 #### 第二题： 重复字符的编码器（Duplicate Encoder）
@@ -187,7 +191,7 @@ name = ''.join(letters) # name = "lovelace"
 
 使用Markdown语法绘制你的程序绘制程序流程图（至少一个），Markdown代码如下：
 
-![程序流程图](/Experiments/img/2023-08-05-22-00-00.png)
+![程序流程图](/python-from-shenjia/python_course-main/Experiments/img/2023-08-05-22-00-00.png)
 
 显示效果如下：
 
@@ -203,6 +207,7 @@ flowchart LR
 查看Mermaid流程图语法-->[点击这里](https://mermaid.js.org/syntax/flowchart.html)
 
 使用Markdown编辑器（例如VScode）编写本次实验的实验报告，包括[实验过程与结果](#实验过程与结果)、[实验考查](#实验考查)和[实验总结](#实验总结)，并将其导出为 **PDF格式** 来提交。
+
 
 ## 实验过程与结果
 
@@ -244,12 +249,18 @@ def add_binary(a,b):
 
 请使用自己的语言并使用尽量简短代码示例回答下面的问题，这些问题将在实验检查时用于提问和答辩以及实际的操作。
 
-1. Python中的列表可以进行哪些操作？
-2. 哪两种方法可以用来对Python的列表排序？这两种方法有和区别？
-3. 如何将Python列表逆序打印？
-4. Python中的列表执行哪些操作时效率比较高？哪些操作效率比较差？是否有类似的数据结构可以用来替代列表？
-5. 阅读《Fluent Python》Chapter 2. An Array of Sequence - Tuples Are Not Just Immutable Lists小节（p30-p35）。总结该小节的主要内容。
+1. Python中的列表可以进行哪些操作？<br></br>
+答：
+2. 哪两种方法可以用来对Python的列表排序？这两种方法有和区别？<br></br>
+答：
+1. 如何将Python列表逆序打印？<br></br>
+答：
+1. Python中的列表执行哪些操作时效率比较高？哪些操作效率比较差？是否有类似的数据结构可以用来替代列表？<br></br>
+答：
+1. 阅读《Fluent Python》Chapter 2. An Array of Sequence - Tuples Are Not Just Immutable Lists小节（p30-p35）。总结该小节的主要内容。<br></br>
+答：
 
 ## 实验总结
 
-总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。
+总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。<br></br>
+此次实验过程中，实验步骤能够流畅进行，从完成题目到提交实验报告都能够较为顺利的完成。对于实验中的编程练习，在思路、想法的实现以及代码设计上还有很大的进步空间，需要牢固下编程基础。
