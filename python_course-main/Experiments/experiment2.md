@@ -70,19 +70,19 @@ Python变量、简单数据类型和列表简介
 <https://www.codewars.com/kata/5a805d8cafa10f8b930005ba>
 
 实验代码：
-```bash
-   def nearest_sq(n):
-     # pass
-     x=int(n**0.5)
-     if x*x==n:
-         return n
-     y=x+1
-     xx=abs(x*x-n)
-     yy=abs(y*y-n)
-     if xx<=yy:
-         return x*x
-     else :
-         return y*y
+```python
+def nearest_sq(n):
+    # pass
+    x=int(n**0.5)
+    if x*x==n:
+        return n
+    y=x+1
+    xx=abs(x*x-n)
+    yy=abs(y*y-n)
+    if xx<=yy:
+        return x*x
+    else :
+        return y*y
 ```
 ---
 
@@ -104,23 +104,23 @@ Python变量、简单数据类型和列表简介
 <https://www.codewars.com/kata/5544c7a5cb454edb3c000047/train/python>
 
 实验代码：
-```bash
-   def bouncing_ball(h, bounce, window):
-    # your code
-     if h<0:
-        return -1
-     if bounce<=0:
-        return -1
-     if bounce>=1:
-        return -1
-     if window>=h:
-        return -1
-     h=h*bounce
-     ans=1
-     while window<h:
-        ans+=2
-        h=h*bounce
-     return ans
+```python
+def bouncing_ball(h, bounce, window):
+# your code
+    if h<0:
+    return -1
+    if bounce<=0:
+    return -1
+    if bounce>=1:
+    return -1
+    if window>=h:
+    return -1
+    h=h*bounce
+    ans=1
+    while window<h:
+    ans+=2
+    h=h*bounce
+    return ans
 
 ```
 ---
@@ -135,14 +135,14 @@ Python变量、简单数据类型和列表简介
 <https://www.codewars.com/kata/54ff3102c1bad923760001f3>
 
 实验代码：
-```bash
-   def get_count(sentence):
-    #pass
-    ans=0
-    for i in sentence:
-        if i=='a'or i=='e'or i=='i' or i=='o' or i=='u' :
-         ans+=1
-    return ans
+```python
+def get_count(sentence):
+#pass
+ans=0
+for i in sentence:
+    if i=='a'or i=='e'or i=='i' or i=='o' or i=='u' :
+        ans+=1
+return ans
 
 ```
 ---
@@ -156,12 +156,12 @@ Python变量、简单数据类型和列表简介
 <https://www.codewars.com/kata/53da3dbb4a5168369a0000fe>
 
 实验代码：
-```bash
-   def even_or_odd(number):
-    if number&1==1:
-        return "Odd"
-    else :
-        return "Even"
+```python
+def even_or_odd(number):
+if number&1==1:
+    return "Odd"
+else :
+    return "Even"
 
 ```
 ### 第四部分
