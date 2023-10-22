@@ -302,10 +302,23 @@ flowchart LR
     B ---->|No| E[End]
 ```
 
+
 查看Mermaid流程图语法-->[点击这里](https://mermaid.js.org/syntax/flowchart.html)
 
 使用Markdown编辑器（例如VScode）编写本次实验的实验报告，包括[实验过程与结果](#实验过程与结果)、[实验考查](#实验考查)和[实验总结](#实验总结)，并将其导出为 **PDF格式** 来提交。
 
+第一题：3和5的倍数（Multiples of 3 or 5）
+
+程序流程图：
+
+```mermaid
+graph LR
+A[开始] --> B{是否有number}
+B --> |有| C[生成0到number-1]
+C --> D[如果为n3或者5的倍数]
+D --> E[返回结果]
+B --> |无| F[结束]
+```
 
 ## 实验过程与结果
 
