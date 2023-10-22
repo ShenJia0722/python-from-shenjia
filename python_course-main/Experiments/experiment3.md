@@ -4,7 +4,7 @@
 
 学号： B20210302118
 
-姓名： 张三
+姓名： 申佳
 
 Github地址：<https://github.com/ShenJia0722/python-from-shenjia>
 
@@ -60,7 +60,16 @@ Python列表操作
 
 实验代码：
 ```python
-
+def solution(number):
+    
+    # 从0到number-1的整数
+    numbers = [i for i in range(number)]
+    
+    # 从0到number-1的整数中，3或者5的倍数
+    multi3or5 =  [i for i in range(number) if i%3==0 or i%5==0]
+    
+    # 返回结果
+    return sum(multi3or5) 
 ```
 ---
 
@@ -82,6 +91,27 @@ Python列表操作
 代码提交地址:
 <https://www.codewars.com/kata/54b42f9314d9229fd6000d9c>
 
+实验代码：
+```python
+def duplicate_encode(word):
+    # 用来保存括号的列表
+    result = []
+    
+    # 将所有字符全部变成小写
+    word = word.lower()
+    
+    # 遍历单词中所有的字符
+    for c in word:
+        # 如果该字符出现次数大于1次，在列表中添加`)`
+        if word.count(c) > 1:
+            result.append(')')
+        # 如果该字符出现次数大于1次，在列表中添加`(`
+        else:
+            result.append('(') 
+    
+    # 将列表中的括号连接成字符串返回
+    return ''.join(result)
+```
 ---
 
 #### 第三题：括号匹配（Valid Braces）
@@ -105,6 +135,35 @@ python中没有内置堆栈数据结构，可以直接使用`list`来作为堆�
 代码提交地址
 <https://www.codewars.com/kata/5277c8a221e209d3f6000b56>
 
+实验代码：
+```python
+braces = "(){}[]" # 括号字符串
+dict_braces = {'}': '{', ']': '[', ')': '('}
+
+def validBraces(string):
+    stack = [] # 用来保存括号的栈
+    for c in string:
+        # 如果是左括号，就入栈
+        if c in '({[':
+            stack.append(c)
+        # 如果是右括号
+        elif c in ')}]':
+            # 如果栈为空，返回False
+            if not stack:
+                return False
+            # 如果栈顶元素和当前元素不匹配，返回False
+            if stack[-1] != dict_braces[c]:
+                return False
+            # 如果栈顶元素和当前元素匹配，就出栈
+            else:
+                stack.pop()
+    # 如果栈为空，返回True
+    if not stack:
+        return True
+    # 如果栈不为空，返回False
+    else:
+        return False
+```
 ---
 
 #### 第四题： 从随机三元组中恢复秘密字符串(Recover a secret string from random triplets)
@@ -151,6 +210,38 @@ length = len(letters)
 - 创建函数`remove_first_letter(triplets, first_letter)`,  从三元组中去掉首字母，返回新的三元组。
 - 遍历字母集合letters，利用上面2个函数得到最后的结果`secret`。
 
+实验代码：
+```python
+def recoverSecret(triplets):
+    # 创建字典用于存储字符的相对顺序
+    graph = {}
+
+    # 构建图，记录字符的相对顺序
+    for triplet in triplets:
+        for char in triplet:
+            if char not in graph:
+                graph[char] = set()
+    
+        graph[triplet[0]].add(triplet[1])
+        graph[triplet[1]].add(triplet[2])
+
+    # 使用深度优先搜索（DFS）拓扑排序获取字符的正确顺序
+    visited = set()
+    result = []
+
+    def dfs(node):
+        if node not in visited:
+            visited.add(node)
+            for neighbor in graph[node]:
+                dfs(neighbor)
+            result.append(node)
+
+    for node in graph:
+        dfs(node)
+
+    # 返回拓扑排序的逆序，即原始字符串
+    return ''.join(result[::-1])
+```
 ---
 
 #### 第五题： 去掉喷子的元音（Disemvowel Trolls）
@@ -178,6 +269,13 @@ print(letters) # ['l', 'o', 'v', 'e', 'l', 'a', 'c', 'e']
 name = ''.join(letters) # name = "lovelace"
 ```
 
+实验代码：
+```python
+def disemvowel(string_):
+    vowels = 'aeiouAEIOU'
+    disemvoweled_string = ''.join([char for char in string_ if char not in vowels])
+    return disemvoweled_string
+```
 ---
 
 ### 第三部分
