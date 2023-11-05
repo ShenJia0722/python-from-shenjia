@@ -1,14 +1,14 @@
 # 实验四 Python字典和while循环
 
-班级： 21计科1
+班级： 21计科1班
 
-学号： 202302200000
+学号： B20210302118
 
-姓名： 张三
+姓名： 申佳
 
-Github地址：<https://github.com/yourusername/python_course>
+Github地址：<https://github.com/ShenJia0722/python-from-shenjia>
 
-CodeWars地址：<https://www.codewars.com/users/yourusername>
+CodeWars地址：<https://www.codewars.com/users/Belief_V>
 
 ---
 
@@ -60,7 +60,7 @@ Python列表操作
     ...
     December: {
         '1': 'Nice','2': 'Nice', ..., '31': 'Naughty'
-    }
+}
 }
 ```
 
@@ -68,6 +68,21 @@ Python列表操作
 代码提交地址：
 <https://www.codewars.com/kata/5662b14e0a1fb8320a00005c>
 
+实验代码：
+```python
+def naughty_or_nice(data):
+    ans1=0
+    ans2=0
+    for dic in data.values():
+        for x in dic.values():
+            if x=='Nice':
+                ans1+=1
+            else :
+                ans2+=1
+    if ans1>=ans2:
+        return "Nice!"
+    return "Naughty!"
+```
 ---
 
 #### 第二题： 观察到的PIN（The observed PIN）
@@ -103,6 +118,37 @@ Python列表操作
 代码提交地址：
 <https://www.codewars.com/kata/5263c6999e0f40dee200059d>
 
+实验代码：
+```python
+def get_pins(observed):
+    #pass # TODO: This is your job, detective!
+    ans=[]
+    op={
+        '1':['2','4'],
+        '2':['1','3','5'],
+        '3':['2','6'],
+        '4':['1','5','7'],
+        '5':['2','4','6','8'],
+        '6':['3','5','9'],
+        '7':['4','8'],
+        '8':['5','7','9','0'],
+        '9':['6','8'],
+        '0':['8']
+    }
+    ans.append(observed)
+    #ans=set(ans)
+    for i in range(len(observed)):
+        x=observed[i]
+        res=[]
+        for y in op[x]:
+            for now in ans:
+                p=list(now)
+                p[i]=y
+                res.append(''.join(p))
+        ans=ans+res
+    ans=set(ans)
+    return ans
+```
 ---
 
 #### 第三题： RNA到蛋白质序列的翻译（RNA to Protein Sequence Translation）
@@ -176,6 +222,64 @@ Amino Acid Dictionary
 代码提交地址：
 <https://www.codewars.com/kata/555a03f259e2d1788c000077>
 
+实验代码：
+```python
+def protein(rna):
+    # your code here
+    # Your dictionary is provided as PROTEIN_DICT
+    p = {
+    # Phenylalanine
+    'UUC': 'F', 'UUU': 'F',
+    # Leucine
+    'UUA': 'L', 'UUG': 'L', 'CUU': 'L', 'CUC': 'L', 'CUA': 'L', 'CUG': 'L',
+    # Isoleucine
+    'AUU': 'I', 'AUC': 'I', 'AUA': 'I',
+    # Methionine
+    'AUG': 'M',
+    # Valine
+    'GUU': 'V', 'GUC': 'V', 'GUA': 'V', 'GUG': 'V',
+    # Serine
+    'UCU': 'S', 'UCC': 'S', 'UCA': 'S', 'UCG': 'S', 'AGU': 'S', 'AGC': 'S',
+    # Proline
+    'CCU': 'P', 'CCC': 'P', 'CCA': 'P', 'CCG': 'P',
+    # Threonine
+    'ACU': 'T', 'ACC': 'T', 'ACA': 'T', 'ACG': 'T',
+    # Alanine
+    'GCU': 'A', 'GCC': 'A', 'GCA': 'A', 'GCG': 'A',
+    # Tyrosine
+    'UAU': 'Y', 'UAC': 'Y',
+    # Histidine
+    'CAU': 'H', 'CAC': 'H',
+    # Glutamine
+    'CAA': 'Q', 'CAG': 'Q',
+    # Asparagine
+    'AAU': 'N', 'AAC': 'N',
+    # Lysine
+    'AAA': 'K', 'AAG': 'K',
+    # Aspartic Acid
+    'GAU': 'D', 'GAC': 'D',
+    # Glutamic Acid
+    'GAA': 'E', 'GAG': 'E',
+    # Cystine
+    'UGU': 'C', 'UGC': 'C',
+    # Tryptophan
+    'UGG': 'W',
+    # Arginine
+    'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'CGG': 'R', 'AGA': 'R', 'AGG': 'R',
+    # Glycine
+    'GGU': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G',
+    # Stop codon
+    'UAA': 'Stop', 'UGA': 'Stop', 'UAG': 'Stop'
+    }
+    ans=[]
+    for i in range(0,len(rna),3):
+        x=rna[i:i+3]
+        y=p[x]
+        if y=='Stop':
+            return ''.join(ans)
+        ans.append(y)
+    return ''.join(ans)
+```
 ---
 
 #### 第四题： 填写订单（Thinkful - Dictionary drills: Order filler）
@@ -191,6 +295,17 @@ Amino Acid Dictionary
 代码提交地址：
 <https://www.codewars.com/kata/586ee462d0982081bf001f07/python>
 
+实验代码：
+```python
+def fillable(stock, merch, n):
+    # Your code goes here.
+    if merch not in stock:
+        return False
+    if stock[merch]>=n:
+        return True
+    else :
+        return False
+```
 ---
 
 #### 第五题： 莫尔斯码解码器（Decode the Morse code, advanced）
@@ -295,7 +410,59 @@ $    ···–··–
 
 代码提交地址：
 <https://www.codewars.com/kata/decode-the-morse-code-advanced>
+实验代码：
+```python
+def decode_bits(bits):
+    # ToDo: Accept 0's and 1's, return dots, dashes and spaces
+    #return bits.replace('111', '-').replace('000', ' ').replace('1', '.').replace('0', '')
+    bits=bits.strip('0')
+    unit=0
+    for x in bits:
+        if x!='0':
+            unit+=1
+        else:
+            break
+    count=1
+    for i in range(1,len(bits)):
+        if bits[i]==bits[i-1]:
+            count+=1
+        else:
+            if count<unit:
+                unit=count
+                count=1
+            else:
+                count=1
+    res=""
+    words=bits.split("0"*7*unit)
+    for word in words:
+        chs=word.split("0"*3*unit)
+        for ch in chs:
+            signs=ch.split("0"*unit)
+            for sign in signs:
+                if sign=="1"*3*unit:
+                    res+="-"
+                else:
+                    res+="."
+            res+=" "
+        res+=" "
+    return res
+            
+        
 
+def decode_morse(morseCode):
+    # ToDo: Accept dots, dashes and spaces, return human-readable message
+    #return morseCode.replace('.', MORSE_CODE['.']).replace('-', MORSE_CODE['-']).replace(' ', '')
+    morseCode=morseCode.strip()
+    ans=""
+    #s=moresCode.split(" ")
+    s = morseCode.split(" ")
+    for x in s:
+        if x!="":
+            ans+=MORSE_CODE[x]
+        else:
+            ans+=" "
+    return "".join(ans)
+```
 ---
 
 ### 第三部分
@@ -309,7 +476,7 @@ $    ···–··–
 
 使用Markdown语法绘制你的程序绘制程序流程图（至少一个），Markdown代码如下：
 
-![程序流程图](/Experiments/img/2023-08-05-22-00-00.png)
+![程序流程图](./img/2023-08-05-22-00-00.png)
 
 显示效果如下：
 
@@ -326,6 +493,18 @@ flowchart LR
 
 使用Markdown编辑器（例如VScode）编写本次实验的实验报告，包括[实验过程与结果](#实验过程与结果)、[实验考查](#实验考查)和[实验总结](#实验总结)，并将其导出为 **PDF格式** 来提交。
 
+实验流程图：
+
+第四题：填写订单
+```mermaid
+flowchart LR
+    A[Start] --> B{仓库里是否有该商品?}
+    B -->|Yes| C{该商品库存是否足够?}
+    B ----|No| D[返回False]
+    C -->|Yes| E[返回True]
+    C -->|NO| F[返回false]
+```
+
 ## 实验过程与结果
 
 请将实验过程与结果放在这里，包括：
@@ -336,7 +515,7 @@ flowchart LR
 
 注意代码需要使用markdown的代码块格式化，例如Git命令行语句应该使用下面的格式：
 
-![Git命令](/Experiments/img/2023-07-26-22-48.png)
+![Git命令](./img/2023-07-26-22-48.png)
 
 显示效果如下：
 
@@ -349,7 +528,7 @@ git commit -m "first commit"
 
 如果是Python代码，应该使用下面代码块格式，例如：
 
-![Python代码](/Experiments/img/2023-07-26-22-52-20.png)
+![Python代码](./img/2023-07-26-22-52-20.png)
 
 显示效果如下：
 
@@ -367,10 +546,61 @@ def add_binary(a,b):
 请使用自己的语言并使用尽量简短代码示例回答下面的问题，这些问题将在实验检查时用于提问和答辩以及实际的操作。
 
 1. 字典的键和值有什么区别？
-2. 在读取和写入字典时，需要使用默认值可以使用什么方法？
-3. Python中的while循环和for循环有什么区别？
-4. 阅读[PEP 636 – Structural Pattern Matching: Tutorial](https://peps.python.org/pep-0636/), 总结Python 3.10中新出现的match语句的使用方法。
+答：字典是一种无序的数据结构，它由键（key）和值（value）组成。每个键和值之间存在着一一对应的关系。
+键（key）是字典中的唯一标识符，用于访问和操作字典中的对应值。键必须是不可变的数据类型，通常使用字符串或数字作为键。字典中的键是唯一的，不能重复，如果尝试使用相同的键添加新的键值对，则会覆盖原有的键值对。
+值（value）是与键相关联的数据，可以是任何类型的数据，如字符串、数字、列表、字典等。字典中的值可以重复，不需要唯一。通过使用键来访问和操作值，可以根据键来进行查找、更新或删除值。
+<br></br>
 
+2. 在读取和写入字典时，需要使用默认值可以使用什么方法？
+答：在读取和写入字典的时候，如果键不存在，可以使用字典的`get()`方法或者使用`setdefault()`方法来设置默认值。
+
+`get(key, default)`方法：该方法用于获取指定键的对应值，如果键不存在，则返回指定的默认值。示例代码如下：
+
+```python
+my_dict = {'key1': 'value1', 'key2': 'value2'}
+value = my_dict.get('key3', 'Default Value')
+print(value)  # 输出：Default Value
+```
+`setdefault(key, default)`方法：该方法用于获取指定键的对应值，如果键不存在，则设置默认值并返回默认值。示例代码如下：
+
+```python
+my_dict = {'key1': 'value1', 'key2': 'value2'}
+value = my_dict.setdefault('key3', 'Default Value')
+print(value)  # 输出：Default Value
+print(my_dict)  # 输出：{'key1': 'value1', 'key2': 'value2', 'key3': 'Default Value'}
+```
+在上述示例中，当尝试获取键`'key3'`对应的值时，由于该键不存在，所以`get()`方法和`setdefault()`方法均返回了指定的默认值。同时，`setdefault()`方法还将默认值添加到了字典中。这两种方法可以灵活地处理字典中键不存在的情况，并且可以设置默认值以便后续的处理。
+
+3. Python中的while循环和for循环有什么区别？
+答：在Python中，`while`循环和`for`循环是两种不同的迭代结构，用于多次执行一段代码。
+
+ `while`循环：`while`循环是一种基于条件判断的循环结构。它会一直重复执行代码块，直到条件变为假。在每次循环开始之前，会检查循环条件是否为真。只有当循环条件为真时，代码块才会执行，否则跳出循环。示例代码如下：
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+上述代码中，`count`初始值为0，通过`while`循环来判断`count`是否小于5。只要条件为真，就会执行`print(count)`和`count += 1`语句，每次循环结束后会重新检查条件，直到条件变为假时，循环结束。
+
+`for`循环：`for`循环是一种基于迭代器或可迭代对象的循环结构。它可以遍历任何可迭代对象（如列表、元组、字符串等）的元素，逐个执行代码块。示例代码如下：
+
+```python
+fruits = ['apple', 'banana', 'cherry']
+for fruit in fruits:
+    print(fruit)
+```
+
+上述代码中，通过`for fruit in fruits`循环遍历了列表`fruits`中的每个元素，并将每个元素赋值给变量`fruit`。在每次循环中，代码块会执行并打印`fruit`的值，直到遍历完所有元素。
+
+总结一下，`while`循环是基于条件判断的循环，适用于需要根据条件来控制循环次数的情况。`for`循环是基于迭代器或可迭代对象的循环，适用于遍历集合中的元素的情况。选择使用哪种循环结构取决于具体的需求和问题的性质。
+<br></br>
+
+4. 阅读[PEP 636 – Structural Pattern Matching: Tutorial](https://peps.python.org/pep-0636/), 总结Python 3.10中新出现的match语句的使用方法。
+答：match语句使用具有特定类型和形状的数据 (subject)，针对 subject 在 match 语句中求值
+从上到下对 subject 与 case 语句中的每个模式进行比较直到确认匹配到一个模式。执行与被确认匹配的模式相关联的动作，如果没有确认到一个完全的匹配，则如果提供了使用通配符 _ 的最后一个 case 语句，则它将被用作已匹配模式。 如果没有确认到一个完全的匹配并且不存在使用通配符的 case 语句，则整个 match 代码块不执行任何操作。
 ## 实验总结
 
-总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。
+总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。<br></br>
+收获很多，也发现了很多不足，需要继续努力。
