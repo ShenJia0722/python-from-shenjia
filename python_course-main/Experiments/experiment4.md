@@ -447,8 +447,6 @@ def decode_bits(bits):
         res+=" "
     return res
             
-        
-
 def decode_morse(morseCode):
     # ToDo: Accept dots, dashes and spaces, return human-readable message
     #return morseCode.replace('.', MORSE_CODE['.']).replace('-', MORSE_CODE['-']).replace(' ', '')
