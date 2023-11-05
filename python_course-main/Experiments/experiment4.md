@@ -500,7 +500,7 @@ flowchart LR
     B -->|Yes| C{该商品库存是否足够?}
     B ----|No| D[返回False]
     C -->|Yes| E[返回True]
-    C -->|NO| F[返回false]
+    C -->|NO| F[返回False]
 ```
 
 ## 实验过程与结果
@@ -568,6 +568,7 @@ print(value)  # 输出：Default Value
 print(my_dict)  # 输出：{'key1': 'value1', 'key2': 'value2', 'key3': 'Default Value'}
 ```
 在上述示例中，当尝试获取键`'key3'`对应的值时，由于该键不存在，所以`get()`方法和`setdefault()`方法均返回了指定的默认值。同时，`setdefault()`方法还将默认值添加到了字典中。这两种方法可以灵活地处理字典中键不存在的情况，并且可以设置默认值以便后续的处理。
+<br></br>
 
 3. Python中的while循环和for循环有什么区别？
 答：在Python中，`while`循环和`for`循环是两种不同的迭代结构，用于多次执行一段代码。
