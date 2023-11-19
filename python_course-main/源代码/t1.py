@@ -1,55 +1,65 @@
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
+from matplotlib.font_manager import FontProperties
+from sklearn.linear_model import Perceptron
 
-# 读取数据文件
-data = pd.read_csv('E:\使用\大三上学期\模式识别\irisdata.txt', sep='\s+')
+# 设置字体
+font = FontProperties(fname=r'C:/Windows/Fonts/simhei.ttf', size=12)  # 使用黑体
 
-# 提取特征列
-X = data[['x1', 'x2', 'x3', 'x4']]
+# 生成线性可分或不可分数据
+def generate_data(separable=True):
+    np.random.seed(0)
+    X = np.random.rand(100, 2)
+    y = (X[:, 0] + X[:, 1] > 1).astype(int) * 2 - 1
+    if not separable:
+        noise = np.random.normal(0, 0.1, size=y.shape)
+        y = y * (1 - noise)
+    return X, y
 
-# 使用“肘部法”找到最优的聚类数量
-wcss = []
-for i in range(1, 11):
-    kmeans = KMeans(n_clusters=i, init='k-means++', n_init=10, random_state=42)
-    kmeans.fit(X)
-    wcss.append(kmeans.inertia_)
+# 定义感知器算法
+class MyPerceptron:
+    def __init__(self, w, b=0, eta=0.1):
+        self.w = np.array(w)
+        self.b = b
+        self.eta = eta
 
-# 绘制“肘部法”图像
-plt.plot(range(1, 11), wcss)
-plt.title('肘部法', fontdict={'family': 'SimSun', 'size': 12})  # SimSun 是宋体
-plt.xlabel('聚类数量', fontdict={'family': 'SimSun', 'size': 12})
-plt.ylabel('聚类内平方和', fontdict={'family': 'SimSun', 'size': 12})
+    def sign_y(self, xi):
+        return np.dot(xi, self.w) + self.b
+
+    def train_ppt(self, X_train, y_train, max_iter=1000):
+        for _ in range(max_iter):
+            wrong_count = 0
+            for i in range(len(X_train)):
+                xi = X_train[i]
+                yi = y_train[i]
+                if yi * self.sign_y(xi) <= 0:
+                    self.w = self.w + self.eta * yi * xi
+                    self.b = self.b + self.eta * yi
+                    wrong_count += 1
+            if wrong_count == 0:
+                break
+
+# 实验参数
+etas = [0.01, 0.1, 0.5]
+separable = True  # 尝试改为False查看不可分数据的情况
+initial_weights = [[1, 1], [0.5, 0.5], [-1, -1]]
+
+plt.figure(figsize=(15, 5))
+
+for i, eta in enumerate(etas, 1):
+    plt.subplot(1, 3, i)
+    X, y = generate_data(separable)
+    ppt = MyPerceptron(w=[1, 1], b=0, eta=eta)
+    ppt.train_ppt(X, y)
+    plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Paired, edgecolor='k', marker='o')
+    x_min, x_max = X[:, 0].min() - 0.1, X[:, 0].max() + 0.1
+    y_min, y_max = X[:, 1].min() - 0.1, X[:, 1].max() + 0.1
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01), np.arange(y_min, y_max, 0.01))
+    Z = ppt.sign_y(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
+    plt.contour(xx, yy, Z, levels=[0], linewidths=2)
+    plt.title(f'学习率={eta}', fontproperties=font)
+    plt.xlabel('特征1', fontproperties=font)
+    plt.ylabel('特征2', fontproperties=font)
+
 plt.show()
-
-# 通过“肘部法”可知最优聚类数量为3
-# 使用K均值算法进行3类的聚类
-kmeans = KMeans(n_clusters=3, init='k-means++', n_init=10, random_state=42)
-y_kmeans = kmeans.fit_predict(X)
-
-# 可视化聚类结果
-plt.scatter(X[y_kmeans == 0]['x1'], X[y_kmeans == 0]
-            ['x2'], s=100, c='red', label='聚类1')
-plt.scatter(X[y_kmeans == 1]['x1'], X[y_kmeans == 1]
-            ['x2'], s=100, c='blue', label='聚类2')
-plt.scatter(X[y_kmeans == 2]['x1'], X[y_kmeans == 2]
-            ['x2'], s=100, c='green', label='聚类3')
-plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[
-            :, 1], s=300, c='yellow', label='聚类中心')
-
-# 设置字体为微软雅黑
-font_properties = {'family': 'Microsoft YaHei', 'size': 12}
-
-plt.title('聚类后的数据', fontdict=font_properties)
-plt.xlabel('x1', fontdict=font_properties)
-plt.ylabel('x2', fontdict=font_properties)
-
-# 设置legend的字体
-plt.legend(prop=font_properties)
-
-plt.show()
-
-# 打印每个样本属于哪个聚类
-for i in range(len(X)):
-    print(f"样本{i+1} 属于聚类 {y_kmeans[i]+1}")

@@ -1,14 +1,14 @@
 # 实验六 Python函数
 
-班级： 21计科1
+班级： 21计科1班
 
-学号： 202302200000
+学号： B20210302118
 
-姓名： 张三
+姓名： 申佳
 
-Github地址：<https://github.com/yourusername/python_course>
+Github地址：<https://github.com/ShenJia0722/python-from-shenjia>
 
-CodeWars地址：<https://www.codewars.com/users/yourusername>
+CodeWars地址：<https://www.codewars.com/users/Belief_V>
 
 ---
 
@@ -71,6 +71,17 @@ lst1 = [
 
 [代码提交地址](https://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe)
 
+实验代码：
+```python
+def count_developers(lst):
+    # Your code here
+    ans=0
+    for x in lst:
+        if x['continent']=='Europe' and x['language']=='JavaScript':
+            ans+=1
+    return ans
+```
+
 ---
 
 #### 第二题： 使用函数进行计算
@@ -103,6 +114,128 @@ eight(divided_by(three()))
 代码提交地址：
 <https://www.codewars.com/kata/525f3eda17c7cd9f9e000b39>
 
+实验代码：
+```python
+def zero(a='0'): 
+    if a=='0':
+        return a
+    if a[0]=='+':
+        return 0+int(a[1])
+    if a[0]=='-':
+        return 0-int(a[1])
+    if a[0]=='*':
+        return 0
+    if a[0]=='/':
+        return 0
+def one(a='1'):
+    if a=='1':
+        return a
+    if a[0]=='+':
+        return 1+int(a[1])
+    if a[0]=='-':
+        return 1-int(a[1])
+    if a[0]=='*':
+        return 1*int(a[1])
+    if a[0]=='/':
+        return int(1/int(a[1]))
+def two(a='2'): 
+    if a=='2':
+        return a
+    if a[0]=='+':
+        return 2+int(a[1])
+    if a[0]=='-':
+        return 2-int(a[1])
+    if a[0]=='*':
+        return 2*int(a[1])
+    if a[0]=='/':
+        return int(2/int(a[1]))
+def three(a='3'): 
+    if a=='3':
+        return a
+    if a[0]=='+':
+        return 3+int(a[1])
+    if a[0]=='-':
+        return 3-int(a[1])
+    if a[0]=='*':
+        return 3*int(a[1])
+    if a[0]=='/':
+        return int(3/int(a[1]))
+def four(a='4'): 
+    if a=='4':
+        return a
+    if a[0]=='+':
+        return 4+int(a[1])
+    if a[0]=='-':
+        return 4-int(a[1])
+    if a[0]=='*':
+        return 4*int(a[1])
+    if a[0]=='/':
+        return int(4/int(a[1]))
+def five(a='5'): 
+    if a=='5':
+        return a
+    if a[0]=='+':
+        return 5+int(a[1])
+    if a[0]=='-':
+        return 5-int(a[1])
+    if a[0]=='*':
+        return 5*int(a[1])
+    if a[0]=='/':
+        return int(5/int(a[1]))
+def six(a='6'): 
+    if a=='6':
+        return a
+    if a[0]=='+':
+        return 6+int(a[1])
+    if a[0]=='-':
+        return 6-int(a[1])
+    if a[0]=='*':
+        return 6*int(a[1])
+    if a[0]=='/':
+        return int(6/int(a[1]))
+def seven(a='7'): 
+    if a=='7':
+        return a
+    if a[0]=='+':
+        return 7+int(a[1])
+    if a[0]=='-':
+        return 7-int(a[1])
+    if a[0]=='*':
+        return 7*int(a[1])
+    if a[0]=='/':
+        return int(7/int(a[1]))
+def eight(a='8'):
+    if a=='8':
+        return a
+    if a[0]=='+':
+        return 8+int(a[1])
+    if a[0]=='-':
+        return 8-int(a[1])
+    if a[0]=='*':
+        return 8*int(a[1])
+    if a[0]=='/':
+        return int(8/int(a[1]))
+def nine(a='9'): 
+    if a=='9':
+        return a
+    if a[0]=='+':
+        return 9+int(a[1])
+    if a[0]=='-':
+        return 9-int(a[1])
+    if a[0]=='*':
+        return 9*int(a[1])
+    if a[0]=='/':
+        return int(9/int(a[1]))
+
+def plus(a):
+    return '+'+a
+def minus(a):
+    return '-'+a
+def times(a):
+    return '*'+a
+def divided_by(a):
+    return '/'+a
+```
 ---
 
 #### 第三题： 缩短数值的过滤器(Number Shortening Filter)
@@ -127,6 +260,22 @@ filter2('pippi') == 'pippi'
 代码提交地址：
 <https://www.codewars.com/kata/56b4af8ac6167012ec00006f>
 
+实验代码：
+```python
+def shorten_number(suffixes, base):
+    def my_filter(data):
+        try:
+            number=int(data)
+        except (TypeError, ValueError):
+            return str(data)
+        else:
+            cnt=0
+            while cnt<len(suffixes)-1 and number//base>0:
+                number//=base
+                cnt+=1
+            return str(number)+suffixes[cnt]
+    return my_filter
+```
 ---
 
 #### 第四题： 编码聚会7
@@ -163,6 +312,21 @@ list1 = [
 代码提交地址：
 <https://www.codewars.com/kata/582887f7d04efdaae3000090>
 
+实验代码：
+```python
+def find_senior(lst): 
+    # your code here
+    #pass
+    maxage=0
+    for x in lst:
+        if x['age']>maxage:
+            maxage=x['age']
+    ans=[]
+    for x in lst:
+        if x['age']==maxage:
+            ans.append(x)
+    return ans
+```
 ---
 
 #### 第五题： Currying versus partial application
@@ -285,6 +449,49 @@ curryPartial(curryPartial(curryPartial(add, 1)), 2, 3) # =>6
 代码提交地址：
 <https://www.codewars.com/kata/53cf7e37e9876c35a60002c9>
 
+实验代码：
+```python
+def curry_partial(f,*args):
+     #""" Curries and partially applies the initial arguments to the function """
+     # 如果f不是函数，直接返回
+    if not callable(f): 
+        return f
+
+    # 查看函数f需要的参数个数
+    num_args = f.__code__.co_argcount
+
+    # 如果f函数不需要参数，说明f是curry_partial函数
+    if num_args == 0:
+        return f(*args)
+
+    if len(args) >= num_args:
+        return f(*args[:num_args])
+
+    def inner(*params):    
+        all_args = [*args, *params]
+
+        # 如果没有参数，这是curry函数，使用链式调用
+        if not args:
+            return curry_partial(f, *all_args)
+
+        # 如果第一个参数不是函数，这是curry函数，使用链式调用        
+        if not callable(args[0]):
+            return curry_partial(f, *all_args)
+
+        # 如果第一个参数是函数，这是partial函数，使用部分函数调用
+        fn = args[0]
+        num_args2 = fn.__code__.co_argcount
+
+        # 如果fn函数不需要参数，说明fn是curry_partial函数
+        if num_args2 == 0:
+            return fn(*all_args)
+
+        if len(all_args) >= num_args2:
+            return fn(*all_args[:num_args2])
+        else:
+            return curry_partial(fn, *all_args)
+    return inner
+```
 ---
 
 ### 第三部分
@@ -298,7 +505,7 @@ curryPartial(curryPartial(curryPartial(add, 1)), 2, 3) # =>6
 
 使用Markdown语法绘制你的程序绘制程序流程图（至少一个），Markdown代码如下：
 
-![程序流程图](/Experiments/img/2023-08-05-22-00-00.png)
+![程序流程图](./img/2023-08-05-22-00-00.png)
 
 显示效果如下：
 
@@ -315,6 +522,18 @@ flowchart LR
 
 使用Markdown编辑器（例如VScode）编写本次实验的实验报告，包括[实验过程与结果](#实验过程与结果)、[实验考查](#实验考查)和[实验总结](#实验总结)，并将其导出为 **PDF格式** 来提交。
 
+第三题： 缩短数值的过滤器(Number Shortening Filter)
+
+流程图：
+```mermaid
+flowchart LR
+    A[Start] --> B[try将输入转为整数]
+    B -->|成功| C[计算转换后的是base的多少倍]
+    C --> D[返回倍数对应符号]
+    B --->|No| E[返回传输内容]
+```
+
+
 ## 实验过程与结果
 
 请将实验过程与结果放在这里，包括：
@@ -325,7 +544,7 @@ flowchart LR
 
 注意代码需要使用markdown的代码块格式化，例如Git命令行语句应该使用下面的格式：
 
-![Git命令](/Experiments/img/2023-07-26-22-48.png)
+![Git命令](./img/2023-07-26-22-48.png)
 
 显示效果如下：
 
@@ -338,7 +557,7 @@ git commit -m "first commit"
 
 如果是Python代码，应该使用下面代码块格式，例如：
 
-![Python代码](/Experiments/img/2023-07-26-22-52-20.png)
+![Python代码](./img/2023-07-26-22-52-20.png)
 
 显示效果如下：
 
@@ -356,9 +575,74 @@ def add_binary(a,b):
 请使用自己的语言并使用尽量简短代码示例回答下面的问题，这些问题将在实验检查时用于提问和答辩以及实际的操作。
 
 1. 什么是函数式编程范式？
+答：函数式编程是一种编程范式，它将计算机程序视为数学函数的计算。这种编程范式强调把计算过程看作是数学函数的组合，而避免使用共享状态以及可变数据。函数式编程中的函数通常没有副作用，并且它们总是返回相同的结果，当给定相同的参数时。这使得函数式编程更容易推理和测试，并且通常也更加并行化。
+函数式编程通常使用一些特殊的工具和技术，例如高阶函数、闭包和柯里化函数等。这些工具和技术可以使得函数式编程代码更加简洁和具有可读性，从而更容易维护和扩展。函数式编程在处理大规模数据和高并发任务方面具有很强的优势，因此在大数据领域、人工智能等领域中得到广泛应用。
+<br></br>
 2. 什么是lambda函数？请举例说明。
-3. 什么是高阶函数？常用的高阶函数有哪些？这些高阶函数如何工作？使用简单的代码示例说明。
+答：Lambda函数是指一种匿名函数，它是在函数式编程中常用的一种表达方式。Lambda函数没有名字，通常是一种轻量级的、用于简单任务的函数。它可以作为参数传递给其他函数，或者作为函数的返回值。
 
+Lambda函数的语法形式是：`lambda 参数列表: 表达式`
+
+下面是一个简单的Lambda函数的例子，该函数接受两个参数，并返回它们的和：
+
+```
+add = lambda x, y: x + y
+result = add(3, 5)
+print(result)  # 输出结果为8
+```
+
+在这个例子中，`lambda x, y: x + y` 定义了一个名为 `add` 的Lambda函数，它接受两个参数 `x` 和 `y`，并返回它们的和。接下来，通过调用 `add(3, 5)`，将3和5作为参数传递给Lambda函数，并将结果存储在 `result` 中，最终输出结果为8。
+
+Lambda函数在函数式编程中经常用于简单的、一次性的计算任务，可以避免显式地定义一个具名函数。常用的场景包括对列表进行变换、筛选和排序等操作，在使用高阶函数时也经常与Lambda函数一起使用。
+<br></br>
+3. 什么是高阶函数？常用的高阶函数有哪些？这些高阶函数如何工作？使用简单的代码示例说明。
+答：高阶函数指的是可以接收其他函数作为参数或者将函数作为返回值返回的函数。在Python中，函数也可以被看作是一种对象，因此高阶函数的应用非常广泛。
+
+常见的高阶函数包括 `map`、`filter`、`reduce`、`sorted` 等，它们分别用于对序列进行映射、筛选、聚合和排序操作。
+
+下面简单介绍一些常用的高阶函数以及它们的用途和代码示例。
+
+- `map`: 对序列中的每个元素应用一个函数，并返回一个映射后的新序列。
+
+```
+# 将列表中的每个元素转为大写字母
+lst = ['apple', 'banana', 'cherry']
+new_lst = list(map(lambda x: x.upper(), lst))
+print(new_lst)  # 输出结果为 ['APPLE', 'BANANA', 'CHERRY']
+```
+
+- `filter`: 对序列中的每个元素应用一个布尔函数，将满足条件的元素过滤出来，返回一个新序列。
+
+```
+# 将列表中的偶数过滤出来
+lst = [1, 2, 3, 4, 5, 6]
+new_lst = list(filter(lambda x: x % 2 == 0, lst))
+print(new_lst)  # 输出结果为 [2, 4, 6]
+```
+
+- `reduce`: 对序列中的元素进行聚合操作，返回一个单一的值。
+
+```
+# 计算列表中元素的乘积
+from functools import reduce
+lst = [1, 2, 3, 4]
+product = reduce(lambda x, y: x * y, lst)
+print(product)  # 输出结果为 24
+```
+
+- `sorted`: 对序列中的元素进行排序，返回一个新序列。
+
+```
+# 对字典列表按照id进行升序排序
+lst = [{'id': 2, 'name': 'Alice'}, {'id': 1, 'name': 'Bob'}, {'id': 3, 'name': 'Charlie'}]
+new_lst = sorted(lst, key=lambda x: x['id'])
+print(new_lst)  # 输出结果为 [{'id': 1, 'name': 'Bob'}, {'id': 2, 'name': 'Alice'}, {'id': 3, 'name': 'Charlie'}]
+```
+
+以上是一些常见的高阶函数的使用示例，它们通过对序列中的元素应用一个特定的函数，实现了各种不同的操作。在使用高阶函数时，通常需要结合Lambda函数或其他函数对象来实现具体的功能，从而使代码更加简洁、灵活和易于维护。
+<br></br>
 ## 实验总结
 
 总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。
+
+算法的使用需要不断实践，把握基础知识，完成完整的代码设计。
