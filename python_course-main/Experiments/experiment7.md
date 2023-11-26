@@ -1,14 +1,15 @@
 # 实验七 Python面向对象编程
 
-班级： 21计科1
+班级： 21计科1班
 
-学号： 202302200000
+学号： B20210302118
 
-姓名： 张三
+姓名： 申佳
 
-Github地址：<https://github.com/yourusername/python_course>
+Github地址：<https://github.com/ShenJia0722/python-from-shenjia>
 
-CodeWars地址：<https://www.codewars.com/users/yourusername>
+CodeWars地址：<https://www.codewars.com/users/Belief_V>
+
 
 ---
 
@@ -87,6 +88,17 @@ False
 代码提交地址：
 <https://www.codewars.com/kata/54fe05c4762e2e3047000add>
 
+实验代码：
+```python
+class Ship:
+    def __init__(self, draft, crew):
+        self.draft = draft
+        self.crew = crew
+    # Your code here
+    def is_worth_it(self):
+        return self.draft-self.crew*1.5>20
+```
+
 ---
 
 #### 第二题： 搭建积木
@@ -120,6 +132,31 @@ b.get_surface_area() # return 88
 代码提交地址：
 <https://www.codewars.com/kata/55b75fcf67e558d3750000a3>
 
+实验代码：
+```python
+class Block:
+    # Good Luck!
+    def __init__(self,args):
+        self.width=args[0]
+        self.length=args[1]
+        self.height=args[2]
+    def get_width(self):
+        return self.width
+    def get_length(self):
+        return self.length
+    def get_height(self):
+        return self.height
+    def get_volume(self):
+        ans=self.width*self.length*self.height
+        return ans
+    def get_surface_area(self):
+        ans1=self.width*self.length
+        ans2=self.width*self.height
+        ans3=self.length*self.height
+        ans=2*(ans1+ans2+ans3)
+        return ans
+```
+
 ---
 
 #### 第三题： 分页助手
@@ -149,6 +186,62 @@ helper.page_index(-10) # should == -1 because negative indexes are invalid
 代码提交地址：
 <https://www.codewars.com/kata/515bb423de843ea99400000a>
 
+实验代码：
+```python
+# TODO: complete this class
+
+class PaginationHelper:
+    
+    # The constructor takes in an array of items and an integer indicating
+    # how many items fit within a single page
+    def __init__(self, collection, items_per_page):
+        #pass
+        self.collection=collection
+        self.items_per_page=items_per_page
+    
+    # returns the number of items within the entire collection
+    def item_count(self):
+        #pass
+        cnt=len(self.collection)
+        return cnt
+        
+    # returns the number of pages
+    def page_count(self):
+        #pass
+        cnt1=len(self.collection)
+        ans=(cnt1+self.items_per_page-1)/self.items_per_page
+        return int(ans)
+    
+    # returns the number of items on the given page. page_index is zero based
+    # this method should return -1 for page_index values that are out of range
+    def page_item_count(self, page_index):
+        #pass
+        lim1=(len(self.collection))/self.items_per_page
+        lim1=int(lim1)
+        lim2=(len(self.collection)+self.items_per_page-1)/self.items_per_page
+        lim2=int(lim2)
+        ans3=(len(self.collection))%(self.items_per_page)
+        if page_index>=lim2 :
+              return -1
+        if page_index<0 :
+              return -1
+        if page_index<lim1:
+              return self.items_per_page
+        return ans3
+        
+            
+    
+    # determines what page an item at the given index is on. Zero based indexes.
+    # this method should return -1 for item_index values that are out of range
+    def page_index(self, item_index):
+                 if item_index<0:
+                       return -1
+                 if item_index>=len(self.collection):
+                        return -1
+                 ans=(item_index)/(self.items_per_page)
+                 ans=int(ans)
+                 return ans
+```
 
 ---
 
@@ -182,6 +275,43 @@ a.add(c)      # raises an exception
 
 代码提交地址：
 <https://www.codewars.com/kata/526dad7f8c0eb5c4640000a4>
+
+实验代码：
+```python
+from math import sqrt
+
+class Vector:
+    def __init__(self,args):
+        self.v=tuple(x for x in args)
+    
+    def __str__(self):
+        return str(self.v).replace(' ','')
+    
+    def check(self, other):
+        if not len(self.v) == len(other.v):
+            raise ValueError('Vectors of different length')
+    
+    
+    def add(self,other):
+        self.check(other)
+        return Vector(x+y for x,y in zip(self.v,other.v))
+    
+    def subtract(self,other):
+        self.check(other)
+        return Vector(x-y for x,y in zip(self.v,other.v))
+    
+    def dot(self,other):
+        self.check(other)
+        return sum(x*y for x,y in zip(self.v,other.v))
+    
+    def norm(self):
+        sum=0
+        for x in self.v:
+            sum+=x*x
+        return sqrt(sum)
+    def equals(self,other):
+        return self.v==other.v
+```
 
 ---
 
@@ -227,6 +357,47 @@ user.rank # => -7 # rank was upgraded to -7
 代码提交地址：
 <https://www.codewars.com/kata/51fda2d95d6efda45e00004e>
 
+实验代码：
+```python
+class User ():    
+    def __init__ (self):
+        self.RANKS = [-8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8]
+        self.rank = -8
+        self.rank_index = 0
+        self.progress = 0
+        
+    def inc_progress (self, rank):
+        rank_index = self.RANKS.index(rank)
+        
+        # 计算rank的差，得出可以获得多少进度
+        
+        # 完成的是同等级的题目
+        if rank_index == self.rank_index:
+            self.progress += 3
+            
+        # 完成的是比当前等级低一级的题目
+        elif rank_index == self.rank_index - 1:
+            self.progress += 1
+            
+        # 完成的是比当前等级高的题目
+        elif rank_index > self.rank_index:
+            difference = rank_index - self.rank_index
+            self.progress += 10 * difference * difference
+        
+        # 如果进度大于100，升级，每减去100进度，升一级    
+        while self.progress >= 100:
+            self.rank_index += 1
+            self.rank = self.RANKS[self.rank_index]
+            self.progress -= 100    
+        
+            # 如果升到8级（最高级），进度被置为0
+            if self.rank == 8:
+                self.progress = 0
+                break
+        if self.rank==8:
+            self.progress = 0
+```
+
 ---
 
 ### 第三部分
@@ -240,7 +411,7 @@ user.rank # => -7 # rank was upgraded to -7
 
 使用Markdown语法绘制你的程序绘制程序类图（至少一个），Markdown代码如下：
 
-![程序类图](/Experiments/img/2023-08-08-22-47-53.png)
+![程序类图](./img/2023-08-08-22-47-53.png)
 
 显示效果如下：
 
@@ -287,7 +458,7 @@ classDiagram
 
 注意代码需要使用markdown的代码块格式化，例如Git命令行语句应该使用下面的格式：
 
-![Git命令](/Experiments/img/2023-07-26-22-48.png)
+![Git命令](./img/2023-07-26-22-48.png)
 
 显示效果如下：
 
@@ -300,7 +471,7 @@ git commit -m "first commit"
 
 如果是Python代码，应该使用下面代码块格式，例如：
 
-![Python代码](/Experiments/img/2023-07-26-22-52-20.png)
+![Python代码](./img/2023-07-26-22-52-20.png)
 
 显示效果如下：
 
@@ -318,9 +489,110 @@ def add_binary(a,b):
 请使用自己的语言并使用尽量简短代码示例回答下面的问题，这些问题将在实验检查时用于提问和答辩以及实际的操作。
 
 1. Python的类中__init__方法起什么作用？
+答：在Python的类中，`__init__` 方法是一个特殊的方法，用于初始化对象的状态。它会在创建新对象时自动调用，并可用于对对象的属性进行初始化或执行其他必要的操作。
+具体来说，`__init__` 方法允许在创建对象时传递参数，并将这些参数用于设置对象的初始状态。可以在 `__init__` 方法内部使用 `self` 参数来引用正在被创建的对象，并使用其属性来存储传递进来的参数值。
+
+下面是一个简单的类及其 `__init__` 方法的示例：
+
+```python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+person1 = Person("Alice", 25)
+print(person1.name)  # 输出结果为 "Alice"
+print(person1.age)  # 输出结果为 25
+```
+在上述示例中，`Person` 类有一个 `__init__` 方法，该方法接受 `name` 和 `age` 两个参数，并将它们分别赋值给 `self.name` 和 `self.age` 属性。当通过 `Person("Alice", 25)` 创建新的对象时，`__init__` 方法会自动调用，并将参数值传递给相应的属性。最后，我们可以通过访问对象的属性来获取和使用这些初始值。
+
+总结起来，`__init__` 方法在类的实例化过程中起到了初始化对象的作用，对实例的属性进行赋值，使得对象在创建时可以具有初始状态。
+<br></br>
 2. Python语言中如何继承父类和改写（override）父类的方法。
+答：在Python语言中，继承父类和改写父类的方法都非常容易，只需要按照以下两个步骤即可：
+
+①定义子类，并在类定义中指定要继承的父类。这可以通过将父类作为子类定义的元组参数之一来完成，例如：`class SubClass(BaseClass):`。
+
+②在子类中定义方法，并在需要的时候改写父类中的方法。可以使用与父类中同名的方法名来覆盖继承的方法。
+
+下面是一个简单的示例，演示了如何继承父类和改写父类的方法：
+
+```python
+class Animal:
+    def __init__(self, name):
+        self.name = name
+    
+    def make_sound(self):
+        print("The animal makes a sound.")
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)
+        self.breed = breed
+    
+    def make_sound(self):
+        print("The dog barks.")
+
+my_animal = Animal("Animal")
+my_animal.make_sound()  # 输出结果为 "The animal makes a sound."
+
+my_dog = Dog("Fido", "Golden Retriever")
+my_dog.make_sound()  # 输出结果为 "The dog barks."
+```
+在上述示例中，`Animal` 类有一个名为 `make_sound` 的方法，用于输出动物发出的声音。在 `Dog` 类中，我们继承了 `Animal` 类，并添加了一个名为 `breed` 的属性。我们还改写了 `make_sound` 方法，使之输出狗叫的声音。注意，在 `Dog` 类的 `__init__` 方法中，我们使用了 `super` 函数来初始化父类的属性。
+最后，我们创建了一个 `Animal` 对象和一个 `Dog` 对象，并分别调用它们的 `make_sound` 方法。可以看到，`Animal` 对象发出了一种默认的声音，而 `Dog` 对象则发出了它自己的声音。
+
+总之，继承和改写父类的方法是Python面向对象编程中非常常用的特性，它们使代码得以更好地组织和复用。
+<br></br>
 3. Python类有那些特殊的方法？它们的作用是什么？请举三个例子并编写简单的代码说明。
+答：在Python中，类有许多特殊的方法，也称为魔法方法或魔术方法，它们以双下划线 `__` 开头和结尾。这些特殊方法在类中定义了许多有用的行为，例如在创建对象时进行初始化、支持算术运算、比较对象等。下面列出了一些常用的特殊方法及其作用：
+
+① `__init__(self, ...)`: 该方法是类被实例化时自动调用的构造函数，它用于初始化对象的状态。在这个方法中，我们可以为对象设置属性和执行其他必要的操作。
+
+②`__str__(self)`: 该方法用于定义对象的字符串表示形式，它会在使用 `print()` 函数打印对象时被自动调用。我们可以在该方法中返回一个字符串，用于描述对象的状态。
+
+③`__eq__(self, other)`: 该方法用于判断两个对象是否相等，当使用 `==` 运算符比较两个对象时，该方法会被自动调用。我们可以在这个方法中定义自己的对象比较方式。
+
+下面是一个简单的示例代码，演示了如何在类中使用这些特殊方法：
+
+```python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def __str__(self):
+        return f"Person object - name: {self.name}, age: {self.age}"
+    
+    def __eq__(self, other):
+        return self.name == other.name and self.age == other.age
+
+person1 = Person("Alice", 25)
+person2 = Person("Bob", 30)
+
+print(person1)  # 输出结果为 "Person object - name: Alice, age: 25"
+
+if person1 == person2:
+    print("They are the same person.")
+else:
+    print("They are different people.")  # 输出结果为 "They are different people."
+
+person3 = Person("Alice", 25)
+
+if person1 == person3:
+    print("They are the same person.")  # 输出结果为 "They are the same person."
+else:
+    print("They are different people.")
+```
+在上述示例中，我们定义了一个 `Person` 类，并实现了 `__init__`、`__str__` 和 `__eq__` 三个特殊方法。`__init__` 方法用于初始化对象的状态，`__str__` 方法用于设置对象的字符串表现形式，`__eq__` 方法用于自定义对象的比较规则。
+接下来，我们创建了三个 `Person` 对象，并使用 `print` 函数打印其中一个对象的字符串表示形式。然后，我们使用 `==` 运算符比较了两个人，打印出它们是否为同一个人的信息。
+最后，我们创建了一个名为 `person3` 的新对象，并以相同的名称和年龄对其进行初始化。通过调用 `==` 运算符，我们可以看到它们被认为是相同的人，因为它们拥有相同的名称和年龄。
+
+总之，特殊方法使得Python类拥有了更加灵活的行为和功能，极大地增强了代码的可读性和可维护性。
+<br></br>
 
 ## 实验总结
 
 总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。
+
+实验中学习，学习中进步，不断汲取经验，累计知识，真正实现实践的锻炼意义。
