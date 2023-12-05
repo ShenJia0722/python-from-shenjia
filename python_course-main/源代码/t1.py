@@ -1,65 +1,71 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.font_manager import FontProperties
-from sklearn.linear_model import Perceptron
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from scipy.stats import multivariate_normal
 
-# 设置字体
-font = FontProperties(fname=r'C:/Windows/Fonts/simhei.ttf', size=12)  # 使用黑体
+# 加载鸢尾花数据集
+iris = load_iris()
+X = iris.data[:, :2]  # 仅使用鸢尾花数据集的前两个特征
+y = iris.target
 
-# 生成线性可分或不可分数据
-def generate_data(separable=True):
-    np.random.seed(0)
-    X = np.random.rand(100, 2)
-    y = (X[:, 0] + X[:, 1] > 1).astype(int) * 2 - 1
-    if not separable:
-        noise = np.random.normal(0, 0.1, size=y.shape)
-        y = y * (1 - noise)
-    return X, y
+# 仅保留两个类别（0和1）
+X = X[y < 2]
+y = y[y < 2]
 
-# 定义感知器算法
-class MyPerceptron:
-    def __init__(self, w, b=0, eta=0.1):
-        self.w = np.array(w)
-        self.b = b
-        self.eta = eta
+# 将数据合并，并创建对应的标签
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    def sign_y(self, xi):
-        return np.dot(xi, self.w) + self.b
+# 计算类别的先验概率
+prior_class0 = np.sum(y_train == 0) / len(y_train)
+prior_class1 = np.sum(y_train == 1) / len(y_train)
 
-    def train_ppt(self, X_train, y_train, max_iter=1000):
-        for _ in range(max_iter):
-            wrong_count = 0
-            for i in range(len(X_train)):
-                xi = X_train[i]
-                yi = y_train[i]
-                if yi * self.sign_y(xi) <= 0:
-                    self.w = self.w + self.eta * yi * xi
-                    self.b = self.b + self.eta * yi
-                    wrong_count += 1
-            if wrong_count == 0:
-                break
+# 计算类别的类条件概率（假设服从正态分布）
+class0 = X_train[y_train == 0]
+class1 = X_train[y_train == 1]
 
-# 实验参数
-etas = [0.01, 0.1, 0.5]
-separable = True  # 尝试改为False查看不可分数据的情况
-initial_weights = [[1, 1], [0.5, 0.5], [-1, -1]]
+class0_mean = np.mean(class0, axis=0)
+class1_mean = np.mean(class1, axis=0)
 
-plt.figure(figsize=(15, 5))
+class0_cov = class1_cov = np.cov(X_train.T)
 
-for i, eta in enumerate(etas, 1):
-    plt.subplot(1, 3, i)
-    X, y = generate_data(separable)
-    ppt = MyPerceptron(w=[1, 1], b=0, eta=eta)
-    ppt.train_ppt(X, y)
-    plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Paired, edgecolor='k', marker='o')
-    x_min, x_max = X[:, 0].min() - 0.1, X[:, 0].max() + 0.1
-    y_min, y_max = X[:, 1].min() - 0.1, X[:, 1].max() + 0.1
-    xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01), np.arange(y_min, y_max, 0.01))
-    Z = ppt.sign_y(np.c_[xx.ravel(), yy.ravel()])
-    Z = Z.reshape(xx.shape)
-    plt.contour(xx, yy, Z, levels=[0], linewidths=2)
-    plt.title(f'学习率={eta}', fontproperties=font)
-    plt.xlabel('特征1', fontproperties=font)
-    plt.ylabel('特征2', fontproperties=font)
+# 定义贝叶斯分类器函数
+def bayes_classifier(x):
+    # 计算类条件概率
+    class0_prob = multivariate_normal.pdf(x, class0_mean, class0_cov)
+    class1_prob = multivariate_normal.pdf(x, class1_mean, class1_cov)
+    
+    # 计算后验概率
+    posterior_class0 = class0_prob * prior_class0
+    posterior_class1 = class1_prob * prior_class1
+    
+    # 返回后验概率较大的类别
+    return 0 if posterior_class0 > posterior_class1 else 1
 
+# 绘制散点图
+plt.figure(figsize=(8, 6))
+plt.scatter(class0[:, 0], class0[:, 1], label='Class 0')
+plt.scatter(class1[:, 0], class1[:, 1], label='Class 1')
+
+# 绘制决策边界
+x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.1), np.arange(y_min, y_max, 0.1))
+Z = np.array([bayes_classifier(np.array([x, y])) for x, y in np.c_[xx.ravel(), yy.ravel()]])
+Z = Z.reshape(xx.shape)
+plt.contourf(xx, yy, Z, alpha=0.2, cmap='coolwarm')  # 修改透明度和颜色映射
+plt.rcParams['image.interpolation'] = 'nearest'
+
+plt.title('Iris Data with Decision Boundary')
+plt.xlabel('Feature 1')
+plt.ylabel('Feature 2')
+plt.legend()
 plt.show()
+
+# 对测试集进行分类预测
+y_pred = np.array([bayes_classifier(x) for x in X_test])
+
+# 计算准确率
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy}")
